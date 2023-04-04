@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Player</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        div.ia21-player {
+            border: 2px solid black;
+        }
+
+        div.ia21-player .contraillers {
+            display: flex; /*É quem decide o tamanho das propriedades filhas*/
+            border-top: 2px solid black;
+            column-gap: 10px;
+        }
+
+        div.ia21-player div.contraillers button.player-pause {
+            background-color: transparent;
+            border: 0 none;
+            border-right: 2px solid black;
+            cursor: pointer;
+        }
+
+        div.ia21-player div.contraillers div.dragbar {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        div.ia21-player div.contraillers div.dragbar::before {
+            content: " ";
+            position: absolute;
+            border-top: 1px solid black;
+            width: 100%;
+            top: calc(50% - .5px); /*Permite o uso de propriedades diferentes*/
+        }
+
+        div.ia21-player div.contraillers div.dragbar div.draggable {
+            background-color: black;
+            width: .5em;
+            height: .5em;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            top: calc(50% - .25em);
+        }
+    </style>
+</head>
+<body>
+    <div class="ia21-player">
+        <video src=""></video>
+        <div class="contraillers">
+            <button class="player-pause">
+                ▶
+            </button>
+            <div class="dragbar timeline">
+                <div class="draggable"></div>
+            </div>
+            <div class="timer">
+                00-00
+            </div>
+            <div class="dragbar volume">
+                <div class="draggable"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
