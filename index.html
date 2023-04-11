@@ -50,13 +50,15 @@
         }
 
         div.ia21-player div.contraillers div.dragbar div.draggable {
+            --porcent: 0;
             background-color: black;
-            width: .5em;
-            height: .5em;
+            width: .5rem;
+            height: .5rem;
             border-radius: 50%;
             cursor: pointer;
             position: absolute;
-            top: calc(50% - .25em);
+            top: calc(50% - .25rem);
+            left: calc(var(--porcent) - .25rem);
         }
     </style>
 </head>
@@ -83,13 +85,22 @@
     </div>
 
     <script> /*Programação funcional = Estudar*/
-        const containers = document.querySelectorAll("div.ia21-player")
+        const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorAll' = pega todos daquele tipo*/
         
-        containers.forEach(el => { /*forEach == Para cada elemento*/
+        containers.forEach(el => { /*forEach = Para cada elemento*/
             const playPause = el.querySelector("button.player-pause")
             const video = el.querySelector("video")
-            playPause.onclick = () => video.play()
+            const timeline = el.querySelector(".dragbar.timeline")
+            const timelineDrag = timeline.querySelector(".draggable")
+            const timer = el.querySelector(".timer")
             /*playPause.addEventListener("click", () => alert("ELANE!"))*/
+            playPause.onclick = () => video.play()
+
+            video.addEventListener("timeupdate", () => {/*Evento para verificação do tempo atual do video*/
+                const percent = (video.currentTime / video.duration) * 100
+                timelineDrag.style.setProperty("--porcent",`${percent}%`)
+                timer.innerText = Math.floor(video.currentTime)
+            })
         })
     </script>
 </body>
