@@ -79,7 +79,7 @@
             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.ogg" type="video/ogg">
         </video>
         <div class="contraillers">
-            <button class="player-pause">
+            <button class="player-pause" data-play-icon="▶" data-pause-icon="||">
                 ▶
             </button>
             <div class="dragbar timeline">
@@ -103,10 +103,20 @@
             const timeline = el.querySelector(".dragbar.timeline")
             const timelineDrag = timeline.querySelector(".draggable")
             const timer = el.querySelector(".timer")
-            /*playPause.addEventListener("click", () => alert("ELANE!"))*/
-            playPause.onclick = () => video.play()
+            /*playPause.addEventListener("click", () => alert("ELANE!"))
+            playPause.onclick = () => video.play()*/
 
             video.currentTime = 59
+
+            playPause.addEventListener("click", () => { /*Pausar e dar play*/
+                if (video.paused) {
+                    video.play()
+                    playPause.innerText = playPause.dataset.pauseIcon
+                    return
+                }
+                video.pause()
+                playPause.innerText = playPause.dataset.playIcon
+            })
 
             video.addEventListener("timeupdate", () => {/*Evento para verificação do tempo atual do video*/
                 const percent = (video.currentTime / video.duration) * 100
