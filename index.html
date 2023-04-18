@@ -67,7 +67,7 @@
             cursor: pointer;
             position: absolute;
             top: calc(50% - .25rem);
-            left: calc(var(--porcent) - .25rem);
+            left: calc(var(--percent) - .25rem)
         }
     </style>
 </head>
@@ -79,7 +79,7 @@
             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.ogg" type="video/ogg">
         </video>
         <div class="contraillers">
-            <button class="player-pause" data-play-icon="▶" data-pause-icon="||">
+            <button class="player-pause" data-play-icon="▶" data-pause-icon="❚❚">
                 ▶
             </button>
             <div class="dragbar timeline">
@@ -97,16 +97,14 @@
     <script> /*Programação funcional = Estudar*/
         const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorAll' = pega todos daquele tipo*/
         
-        containers.forEach(el => { /*forEach = Para cada elemento*/
-            const playPause = el.querySelector("button.player-pause")
-            const video = el.querySelector("video")
-            const timeline = el.querySelector(".dragbar.timeline")
+        containers.forEach(container => { /*forEach = Para cada elemento*/
+            const playPause = container.querySelector("button.player-pause")
+            const video = container.querySelector("video")
+            const timeline = container.querySelector(".dragbar.timeline")
             const timelineDrag = timeline.querySelector(".draggable")
-            const timer = el.querySelector(".timer")
+            const timer = container.querySelector(".timer")
             /*playPause.addEventListener("click", () => alert("ELANE!"))
             playPause.onclick = () => video.play()*/
-
-            video.currentTime = 59
 
             playPause.addEventListener("click", () => { /*Pausar e dar play*/
                 if (video.paused) {
@@ -129,6 +127,33 @@
                     timer.innerText = min + ":" + seg
                 }
 
+            })
+            
+            // ---------------------------------------------------------
+            
+            const dragbars = container.querySelectorAll(".dragbar") /*'Div' onde fica a barra*/
+            
+            dragbars.forEach(dragbar => {
+                const dragabble = dragbar.querySelector(".draggable") /*Div da barra em si*/
+                if (dragbar.classList.contains("volume")) {
+                    dragabble.style.setProperty("--percent", `100%`)
+                }
+                dragbar.addEventListener("click", ev => {
+                    const width = Math.floor(dragbar.getBoundingClientRect().width)/*Arredondar para menos*/
+                    const index = ev.offsetX / width
+                    const percent = index * 100
+                    dragabble.style.setProperty("--percent", `${percent}%`)
+
+                    if (dragbar.classList.contains("timeline")) {
+                        video.currentTime = video.duration * index
+                        return
+                    }
+
+                    if (dragbar.classList.contains("volume")) {
+                        video.volume = index
+                        return
+                    }
+                })
             })
         })
     </script>
