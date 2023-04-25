@@ -3,26 +3,30 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Player</title>
+    <title>Pequena Vênus</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
     <style>
+        /*Cap. e Drag*/
         * {
             box-sizing: border-box;
         }
 
         body {
             background-color: rgb(207, 191, 221);
-            display: grid;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
         .medusa {
-            margin-left: 115%;
             height: 200px;
             width: 200px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
         }
 
         div.ia21-player {
@@ -56,6 +60,7 @@
         div.ia21-player div.contraillers div.dragbar {
             flex-grow: 1;
             position: relative;
+            
         }
 
         div.ia21-player div.contraillers div.dragbar::before {
@@ -64,6 +69,7 @@
             border-top: 1px solid black;
             width: 100%;
             top: calc(50% - .5px); /*Permite o uso de propriedades diferentes*/
+            cursor: pointer;
         }
 
         div.ia21-player div.contraillers div.dragbar div.draggable {
@@ -75,7 +81,8 @@
             cursor: pointer;
             position: absolute;
             top: calc(50% - .25rem);
-            left: calc(var(--percent) - .25rem)
+            left: calc(var(--percent) - .25rem);
+            pointer-events: none; /*Remove interação com a bolinha*/
         }
         
     </style>
@@ -103,6 +110,7 @@
         </div>
     </div>
     <img src="medusa.png" alt="Medusa" class="medusa">
+    
 
     <script> /*Programação funcional = Estudar*/
         const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorAll' = pega todos daquele tipo*/
@@ -145,10 +153,37 @@
             
             dragbars.forEach(dragbar => {
                 const dragabble = dragbar.querySelector(".draggable") /*Div da barra em si*/
-                if (dragbar.classList.contains("volume")) {
+                if (dragbar.classList.contains("volume")) { /*Deixa o volume no maximo*/
                     dragabble.style.setProperty("--percent", `100%`)
                 }
-                dragbar.addEventListener("click", ev => {
+
+                dragbar.addEventListener("mousedawn", ev => {
+                    dragbar.classList.add("dragging") /*Fornece classe*/
+                })
+
+                dragbar.addEventListener("mouseup", ev => {
+                    dragbar.classList.remove("dragging")
+                })
+
+                dragbar.addEventListener("mouseout", ev => {
+                    dragbar.classList.remove("dragging") /*Permite que arraste até o fim do elemento*/
+                })
+
+                dragbar.addEventListener("mousemove", ev => {
+                    if (ev.target != dragbar || !dragbar.classList.contains("dragging")) /*Se tem a classe 'dragging' ou esta sendo movido na 'dragbar'*/
+                        return
+                        
+                    const width = Math.floor(dragbar.getBoundingClientRect().width)
+                    const index = (ev.offsetX / width)
+                    const percent = index * 100
+
+                    dragabble.style.setProperty("--percent", `${percent}%`) /*Coloca a porcentagem no css | Para ficar no local correto*/
+                })
+
+                dragbar.addEventListener("mouseup", ev => {
+                    if (ev.target != dragbar)
+                        return
+
                     const width = Math.floor(dragbar.getBoundingClientRect().width)/*Arredondar para menos*/
                     const index = ev.offsetX / width
                     const percent = index * 100
