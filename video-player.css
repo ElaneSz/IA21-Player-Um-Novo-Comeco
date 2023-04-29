@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -20,12 +22,14 @@ body {
 
 div.ia21-player {
     margin-top: 5em;
-    border: 4px solid rgb(125, 71, 170);
+    border: 10px solid rgb(125, 71, 170);
+    border-radius: 6px;
     border-style: outset;
     width: 70rem;
     display: flex;
     flex-direction: column;
     background-color: rgb(150, 124, 172);
+    font-family: 'Roboto', sans-serif;
 }
 
 div.ia21-player video {
@@ -34,15 +38,15 @@ div.ia21-player video {
 
 div.ia21-player .contraillers {
     display: flex; /*É quem decide o tamanho das propriedades filhas*/
-    border-top: 2px solid black;
-    column-gap: 1em; /*Distancia entre os blocos*/
-    padding-right: 1em;
+    border-top: 3px solid rgb(125, 71, 170);
+    column-gap: .4em; /*Distancia entre os blocos*/
+    padding-right: .4em;
 }
 
 div.ia21-player div.contraillers button.player-pause {
     background-color: transparent;
     border: 0 none;
-    border-right: 2px solid black;
+    border-right: 3px solid rgb(125, 71, 170);
     cursor: pointer;
     line-height: 1em;
     width: 3em;
@@ -52,6 +56,7 @@ div.ia21-player div.contraillers div.dragbar {
     flex-grow: 1;
     position: relative;
     cursor: pointer;
+    height: 2em;
 }
 
 div.ia21-player div.contraillers div.dragbar div.timeline {
@@ -61,7 +66,7 @@ div.ia21-player div.contraillers div.dragbar div.timeline {
 div.ia21-player div.contraillers div.dragbar::before {
     content: " ";
     position: absolute;
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(0, 0, 0);
     width: 100%;
     top: calc(50% - .5px); /*Permite o uso de propriedades diferentes*/
     cursor: pointer;
@@ -77,6 +82,21 @@ div.ia21-player div.contraillers div.dragbar div.draggable {
     top: calc(50% - .25em);
     left: calc(var(--percent) - .25em);
     pointer-events: none; /*Remove interação com a bolinha*/
+}
+
+div.ia21-player div.contraillers button.iconVolume, button.iconRepetir, 
+button.iconVoltar, button.iconPassar {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0 none;
+    line-height: 1em;
+    width: 3em;
+    border-right: 3px solid rgb(125, 71, 170);
+}
+
+div.ia21-player div.contraillers, 
+button.iconVoltar, button.iconPassar {
+    border-left: 3px solid rgb(125, 71, 170);
 }
 
 div.ia21-player div.controllers div.timer {
