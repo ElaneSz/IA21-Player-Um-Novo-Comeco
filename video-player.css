@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 * {
     box-sizing: border-box;
@@ -30,6 +30,7 @@ div.ia21-player {
     flex-direction: column;
     background-color: rgb(150, 124, 172);
     font-family: 'Roboto', sans-serif;
+    box-shadow: 0 0 7em rgb(113, 60, 156);
 }
 
 div.ia21-player video {

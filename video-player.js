@@ -6,7 +6,7 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
             const timeline = container.querySelector(".dragbar.timeline")
             const timelineDrag = timeline.querySelector(".draggable")
             const timer = container.querySelector(".timer")
-            /*const iconVolume = container.querySelector(".iconVolume")*/
+            const iconVolume = container.querySelector(".iconVolume")
             
             /*playPause.addEventListener("click", () => alert("ELANE!"))
             playPause.onclick = () => video.play()*/
@@ -20,17 +20,18 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 video.pause()
                 playPause.innerText = playPause.dataset.playIcon
             })
-
-            /*iconVolume.addEventListener("click", () => {
-                if (video.volume != iconVolume.dataset.volumemaxIcon) {
-                    
+            
+            Audio = false
+            iconVolume.addEventListener("click", () => { 
+                if (Audio == false) {
                     iconVolume.innerText = iconVolume.dataset.volumemudoIcon
+                    Audio = true
                     return
-                }else{
-                    iconVolume.innerText = iconVolume.dataset.volumemaxIcon
                 }
-                
-            })*/
+                Audio = false
+                iconVolume.innerText = iconVolume.dataset.volumemaxIcon
+                console.log(Audio)
+            })
 
             video.addEventListener("timeupdate", () => {/*Evento para verificação do tempo atual do video*/
                 const percent = (video.currentTime / video.duration) * 100
