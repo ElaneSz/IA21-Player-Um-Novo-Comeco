@@ -63,7 +63,7 @@ div.ia21-player div.contraillers div.dragbar {
 div.ia21-player div.contraillers div.dragbar::before {
     content: " ";
     position: absolute;
-    border-top: 1px solid rgb(0, 0, 0);
+    border-top: 2px solid rgb(0, 0, 0);
     min-width: 100%;
     top: calc(50% - .5px); /*Permite o uso de propriedades diferentes*/
     cursor: pointer;
@@ -104,4 +104,8 @@ div.ia21-player div.controllers div.timer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+div.ia21-player div.contraillers div.dragbar.timeline {
+    width: 30%;
 }

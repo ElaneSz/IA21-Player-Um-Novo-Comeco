@@ -21,18 +21,6 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 playPause.innerText = playPause.dataset.playIcon
             })
             
-            Audio = false
-            iconVolume.addEventListener("click", () => { 
-                if (Audio == false) {
-                    iconVolume.innerText = iconVolume.dataset.volumemudoIcon
-                    Audio = true
-                    return
-                }
-                Audio = false
-                iconVolume.innerText = iconVolume.dataset.volumemaxIcon
-                console.log(Audio)
-            })
-
             video.addEventListener("timeupdate", () => {/*Evento para verificação do tempo atual do video*/
                 const percent = (video.currentTime / video.duration) * 100
                 /*timelineDrag.style.setProperty("--porcent",`${percent}%`)
@@ -63,9 +51,26 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
             
             dragbars.forEach(dragbar => {
                 const dragabble = dragbar.querySelector(".draggable") /*Div da barra em si*/
-                if (dragbar.classList.contains("volume")) { /*Deixa o volume no maximo*/
-                    dragabble.style.setProperty("--percent", `100%`)
-                }
+                
+                let audio = null
+                iconVolume.addEventListener("click", () => { 
+                    if (!dragbar.classList.contains("volume"))
+                        return
+
+                    if (video.volume > 0) { /*Deixa o volume no mudo*/
+                        iconVolume.innerText = iconVolume.dataset.volumemudoIcon
+                        dragabble.style.setProperty("--percent", `0%`)
+                        Audio = true
+                        audio = video.volume
+                        video.volume = 0
+                        return
+                    }
+                    
+                    /*Deixa o volume no maximo*/
+                    dragabble.style.setProperty("--percent", `${audio * 100}%`)
+                    video.volume = audio
+                    iconVolume.innerText = iconVolume.dataset.volumemaxIcon
+                })
 
                 dragbar.addEventListener("mousedawn", ev => {
                     dragbar.classList.add("dragging") /*Fornece classe*/
