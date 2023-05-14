@@ -1,15 +1,40 @@
+// ---✀------------------------------------------------------
+// ENCONTRANDO DOM DOS PLAYERS
+// 
+
 const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorAll' = pega todos daquele tipo*/
-        
-        containers.forEach(container => { /*forEach = Para cada elemento*/
+        // ---✀------------------------------------------------------
+        // PERCORRENDO TODOS OS PLAYERS
+        // 
+
+        containers.forEach(async container => { /*forEach = Para cada elemento*/
+            // ---✀------------------------------------------------------
+            // ENCONTRANDO ELEMENTOS DOM DO PLAYER 
+            //
+
             const playPause = container.querySelector("button.player-pause")
             const video = container.querySelector("video")
             const timeline = container.querySelector(".dragbar.timeline")
             const timelineDrag = timeline.querySelector(".draggable")
             const timer = container.querySelector(".timer")
             const iconVolume = container.querySelector(".iconVolume")
+            const dragbars = container.querySelectorAll(".dragbar") /*'Div' onde fica a barra*/
+
+            // ---✀------------------------------------------------------
+            // LER PLAYLIST DO ARQUIVO JSON
+            //
+            /*const requisicao = await fetch(container.dataset.playlist)
+            const json = await requisicao.json()
+
+            json.forEach(movie => {
+                playlist.innerHTML += `
+                <div>${movie.title}</div>
+                `
+            })*/
             
-            /*playPause.addEventListener("click", () => alert("ELANE!"))
-            playPause.onclick = () => video.play()*/
+            // ---✀------------------------------------------------------
+            // BOTÃO PLAY PAUSE
+            //
 
             playPause.addEventListener("click", () => { /*Pausar e dar play*/
                 if (video.paused) {
@@ -20,17 +45,12 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 video.pause()
                 playPause.innerText = playPause.dataset.playIcon
             })
+            // ---✀------------------------------------------------------
+            // CONTADOR DE TEMPO
+            //
             
             video.addEventListener("timeupdate", () => {/*Evento para verificação do tempo atual do video*/
                 const percent = (video.currentTime / video.duration) * 100
-                /*timelineDrag.style.setProperty("--porcent",`${percent}%`)
-                timer.innerText = Math.floor(video.currentTime) Para mostrar o tempo em valores inteiros | em segundos (sem os zeros)*/
-                /*seg = timer.innerText - 60
-                if (timer.innerText >= 60) {
-                    min = Math.floor(timer.innerText/60)
-                    seg = Math.floor(timer.innerText%60)
-                    timer.innerText = min + ":" + seg
-                }*/
                 // 
                 const s = Math.floor(video.currentTime)
                 const m = Math.floor(s / 60)
@@ -44,14 +64,17 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 timer.innerText = `${sh}:${sm}:${ss}`
 
             })
-            
-            // ---------------------------------------------------------
-            
-            const dragbars = container.querySelectorAll(".dragbar") /*'Div' onde fica a barra*/
+            // ---✀------------------------------------------------------
+            // BARRAS (TIMELINE E VOLUME) 
+            //
             
             dragbars.forEach(dragbar => {
                 const dragabble = dragbar.querySelector(".draggable") /*Div da barra em si*/
-                
+
+                if (dragbar.classList.contains("volume")) {
+                    dragabble.style.setProperty("--percent", `100%`)
+                }
+
                 let audio = null
                 iconVolume.addEventListener("click", () => { 
                     if (!dragbar.classList.contains("volume"))
@@ -85,15 +108,15 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 })
 
                 dragbar.addEventListener("mousemove", ev => {
-                    if (ev.target != dragbar || !dragbar.classList.contains("dragging")) /*Se tem a classe 'dragging' ou esta sendo movido na 'dragbar'*/
-                        return
-                        
+                    if (ev.target != dragbar || !dragbar.classList.contains("dragging"))  /*Se tem a classe 'dragging' ou esta sendo movido na 'dragbar'*/
+                      return
+              
                     const width = Math.floor(dragbar.getBoundingClientRect().width)
                     const index = (ev.offsetX / width)
                     const percent = index * 100
-
+              
                     dragabble.style.setProperty("--percent", `${percent}%`) /*Coloca a porcentagem no css | Para ficar no local correto*/
-                })
+                  })
 
                 dragbar.addEventListener("mouseup", ev => {
                     if (ev.target != dragbar)

@@ -10,7 +10,7 @@
     <script defer async src="video-player.js"></script>
 </head>
 <body>
-    <div class="ia21-player">
+    <div class="ia21-player" data-playlist="list1.json">
         <video>
             <!-- https://gist.github.com/jsturgis/3b19447b304616f18657 -->
             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
@@ -41,6 +41,8 @@
             <div class="dragbar volume"> 
                 <div class="draggable"></div>
             </div>
+        </div>
+        <div class="playlist">
         </div>
     </div>
     <img src="medusa.png" alt="Medusa" class="medusa">
