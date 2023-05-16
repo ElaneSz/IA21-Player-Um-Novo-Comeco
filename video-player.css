@@ -44,18 +44,17 @@ div.ia21-player .contraillers {
     padding-right: .4em;
 }
 
-div.ia21-player div.contraillers button.abir-playlist {
-    background-color: blue;
-    display: none;
-}
-
-div.ia21-player div.contraillers button.player-pause {
+div.ia21-player div.contraillers button.player-pause, button.abrir-playlist {
     background-color: transparent;
     border: 0 none;
     border-right: 3px solid rgb(125, 71, 170);
     cursor: pointer;
     line-height: 1em;
     width: 3em;
+}
+
+.escondido {
+    display: none;
 }
 
 div.ia21-player div.contraillers div.dragbar {

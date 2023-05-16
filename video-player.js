@@ -20,6 +20,7 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
             const iconVolume = container.querySelector(".iconVolume")
             const dragbars = container.querySelectorAll(".dragbar") /*'Div' onde fica a barra*/
             const playlist = container.querySelector(".playlist")
+            const ativar = container.querySelector(".abrir-playlist")
 
             // ---✀------------------------------------------------------
             // LER PLAYLIST DO ARQUIVO JSON
@@ -33,6 +34,11 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 `
             })
             
+            ativar.addEventListener("click", () => {
+                playlist.classList.toggle("escondido") /*Remover 'Classe'*/
+            })
+
+        
             // ---✀------------------------------------------------------
             // BOTÃO PLAY PAUSE
             //
@@ -79,7 +85,9 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                 // ---✀------------------------------------------------------
                 // ICONE DE AUDIO 
                 //
+                
                 let audio = null
+
                 iconVolume.addEventListener("click", () => { 
                     if (!dragbar.classList.contains("volume"))
                         return
@@ -99,7 +107,7 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                     iconVolume.innerText = iconVolume.dataset.volumemaxIcon
                 })
 
-                dragbar.addEventListener("mousedawn", ev => {
+                dragbar.addEventListener("mousedown", ev => {
                     dragbar.classList.add("dragging") /*Fornece classe*/
                 })
 
