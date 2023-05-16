@@ -44,6 +44,11 @@ div.ia21-player .contraillers {
     padding-right: .4em;
 }
 
+div.ia21-player div.contraillers button.abir-playlist {
+    background-color: blue;
+    display: none;
+}
+
 div.ia21-player div.contraillers button.player-pause {
     background-color: transparent;
     border: 0 none;

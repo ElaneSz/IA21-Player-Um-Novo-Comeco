@@ -19,18 +19,19 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
             const timer = container.querySelector(".timer")
             const iconVolume = container.querySelector(".iconVolume")
             const dragbars = container.querySelectorAll(".dragbar") /*'Div' onde fica a barra*/
+            const playlist = container.querySelector(".playlist")
 
             // ---✀------------------------------------------------------
             // LER PLAYLIST DO ARQUIVO JSON
             //
-            /*const requisicao = await fetch(container.dataset.playlist)
-            const json = await requisicao.json()
-
-            json.forEach(movie => {
+            const requisicao = await fetch(container.dataset.playlist)
+            const lista = await requisicao.json()
+            
+            lista.forEach(filme => {
                 playlist.innerHTML += `
-                <div>${movie.title}</div>
+                <div>${filme.title}</div>
                 `
-            })*/
+            })
             
             // ---✀------------------------------------------------------
             // BOTÃO PLAY PAUSE
@@ -75,6 +76,9 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
                     dragabble.style.setProperty("--percent", `100%`)
                 }
 
+                // ---✀------------------------------------------------------
+                // ICONE DE AUDIO 
+                //
                 let audio = null
                 iconVolume.addEventListener("click", () => { 
                     if (!dragbar.classList.contains("volume"))
