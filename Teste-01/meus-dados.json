@@ -1,0 +1,20 @@
+[
+    {
+        "nome": "Elane",
+        "idade": 18,
+        "oculos": true,
+        "apelido": null
+    },
+    {
+        "nome": "Emilly",
+        "idade": 20,
+        "oculos": true,
+        "apelido": null
+    },
+    {
+        "nome": "Emerson",
+        "idade": 17,
+        "oculos": false,
+        "apelido": null
+    }
+]

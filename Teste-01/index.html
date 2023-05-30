@@ -5,13 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste-01</title>
+    <style>
+        button {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    
     <script>
         async function main (){ /*Função que 'sabe' que vai levar mais tempo para obter respostas*/
-            const request = await fetch("meus-dados.txt") /*Para e espera a resposta*/
-            const data = await request.text() /*Para e espera a resposta (dados)*/
-            document.body.innerHTML = `<pre>${data}</pre>` /*Imprime os dados no corpo do HTML*/
+            const request = await fetch("meus-dados.json") /*Para e espera a resposta | 'fetch' = Busca*/
+            const data = await request.json() /*Para e espera a resposta (dados) | Converte as informações*/
+            /*document.body.innerHTML = `<pre>${data}</pre>` Imprime os dados no corpo do HTML*/
+
+            data.forEach(pessoa => {
+                document.body.innerHTML += `<button>
+                    ${pessoa.nome} |
+                    ${pessoa.idade} |
+                    ${pessoa.oculos ? "Usa oculos" : "Não usa oculos"} |
+                    ${pessoa.apelido ? "Tem apelido" : "Não tem apelido"}
+                </button>`
+            })
         }
         main()
     </script>
