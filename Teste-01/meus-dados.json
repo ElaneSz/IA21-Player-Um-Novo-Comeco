@@ -1,19 +1,19 @@
 [
     {
         "nome": "Elane",
-        "idade": 18,
+        "data-nascimento": [2004,9,23],
         "oculos": true,
         "apelido": null
     },
     {
         "nome": "Emilly",
-        "idade": 20,
+        "data-nascimento": [2002,12,30],
         "oculos": true,
         "apelido": null
     },
     {
         "nome": "Emerson",
-        "idade": 17,
+        "data-nascimento": [2006,3,5],
         "oculos": false,
         "apelido": null
     }

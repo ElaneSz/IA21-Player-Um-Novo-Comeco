@@ -15,6 +15,7 @@
     
     <script>
         async function main (){ /*Função que 'sabe' que vai levar mais tempo para obter respostas*/
+            const year = new Date().getFullYear()
             const request = await fetch("meus-dados.json") /*Para e espera a resposta | 'fetch' = Busca*/
             const data = await request.json() /*Para e espera a resposta (dados) | Converte as informações*/
             /*document.body.innerHTML = `<pre>${data}</pre>` Imprime os dados no corpo do HTML*/
@@ -22,10 +23,10 @@
             data.forEach(pessoa => {
                 document.body.innerHTML += `<button>
                     ${pessoa.nome} |
-                    ${pessoa.idade} |
-                    ${pessoa.oculos ? "Usa oculos" : "Não usa oculos"} |
+                    ${year - pessoa["data-nascimento"][0]} |
+                    ${pessoa.oculos ? "Usa oculos" : "Não usa oculos"} | 
                     ${pessoa.apelido ? "Tem apelido" : "Não tem apelido"}
-                </button>`
+                </button>` /*'?' = Se | ':' = Se não*/
             })
         }
         main()
