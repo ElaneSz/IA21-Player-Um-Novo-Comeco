@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+    <style>
+        button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        async function main (){ /*Função que 'sabe' que vai levar mais tempo para obter respostas*/
+            const year = new Date().getFullYear()
+            const request = await fetch("meus-dados.json") /*Para e espera a resposta | 'fetch' = Busca*/
+            const data = await request.json() /*Para e espera a resposta (dados) | Converte as informações*/
+            /*document.body.innerHTML = `<pre>${data}</pre>` Imprime os dados no corpo do HTML*/
+
+            data.forEach(pessoa => {
+                document.body.innerHTML += `<button>
+                    ${pessoa.nome} |
+                    ${year - pessoa["data-nascimento"][0]} |
+                    ${pessoa.oculos ? "Usa oculos" : "Não usa oculos"} | 
+                    ${pessoa.apelido ? "Tem apelido" : "Não tem apelido"}
+                </button>` /*'?' = Se | ':' = Se não*/
+            })
+        }
+        main()
+    </script>
+</body>
+</html>
