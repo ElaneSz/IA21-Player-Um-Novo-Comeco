@@ -1,14 +1,11 @@
 # IA21-Player-Um-Novo-Comeco
 
-### Ambiente com os seguintes projetos:
-````
-
+## Ambiente com os seguintes projetos:
+````bash
 | Player | Recuperação | Testes |
 
 ````
-
-### Desenvolvedora
-
-````
+## Desenvolvedora
+````bash
 Pequena Vêvus ^-^
 ````
