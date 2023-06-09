@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/public'))
 app.use("/create", (req, res) => { //Criar
   const { file, texto } = req.query
   fs.writeFileSync(file, texto)
-  res.send(`<div>Criado</div>`)
+  res.send("Criado!!")
 })
 
 app.use("/read", (req, res) => { //Ler
@@ -19,15 +19,15 @@ app.use("/read", (req, res) => { //Ler
 app.use("/update", (req, res) => { //Atualizar
   const { file, texto } = req.query
   fs.appendFileSync(file, texto)
-  res.send()
+  res.send("Atualizado!!")
 })
 
 app.use("/delete", (req, res) => { //Deletar
   const { file } = req.query
   fs.rmSync(file)
-  res.send("Deletado")
+  res.send("Deletado!!")
 })
 
-app.listen(8080, () => console.log("Servidor rodando!"))
+app.listen(8080, () => console.log("Servidor rodando!")) // node http-server.js | Para executar o servidor
 
-//update?file=Alegria&texto=nnnnnnn | Para alterar
+//update?file=xxx&texto=xxx | Para alterar (estrutura)

@@ -1,0 +1,1 @@
+/*Para abrir a imagem e transitar*/
