@@ -6,3 +6,9 @@
 | Player | Recuperação | Testes |
 
 ````
+
+### Desenvolvedora
+
+````
+Pequena Vêvus ^-^
+````
