@@ -5,6 +5,12 @@
 | Player | Recuperação | Testes |
 
 ````
+### Comandos
+ - npm init -y
+ - npm i
+ - npm i sqlite sqlite3
+ - SQLite Viewer (extensão)
+````
 ### Desenvolvedora
 ````bash
 Pequena Vênus ^-^
