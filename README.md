@@ -10,8 +10,7 @@
  - npm i sqlite sqlite3
  - SQLite Viewer (extensão)
  - REST Client
-````
-### Desenvolvedora
 ````bash
+### Desenvolvedora
     Pequena Vênus ^-^
 ````
