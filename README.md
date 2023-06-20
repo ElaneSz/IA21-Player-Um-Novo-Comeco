@@ -11,7 +11,6 @@
  - SQLite Viewer (extensão)
  - REST Client
 ````
-````
 ### Desenvolvedora
-Pequena Vênus ^-^
+    Pequena Vênus ^-^
 ````
