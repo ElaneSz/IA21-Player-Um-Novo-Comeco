@@ -1,9 +1,9 @@
-PUT  http://127.0.0.1:3000/movies?id=4 HTTP/1.1
+PUT  http://127.0.0.1:3000/movies?id=5 HTTP/1.1
 content-type: application/json
 
 {
-    "title": "AAAAAA",
-    "source": "http://AAAAA.mp4",
-    "description": "AAAAA",
-    "thumb": "http://SSSSS.jpg"
+    "title": "SSSSSSSSSS",
+    "source": "http://SSSSS.mp4",
+    "description": "SSSS",
+    "thumb": "http://KKKKK.jpg"
 }

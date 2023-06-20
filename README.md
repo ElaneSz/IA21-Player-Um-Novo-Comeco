@@ -3,7 +3,6 @@
 ### Ambiente com os seguintes projetos:
 ````bash
 | Player | Recuperação | Testes |
-
 ````
 ### Comandos
  - npm init -y
@@ -12,7 +11,7 @@
  - SQLite Viewer (extensão)
  - REST Client
 ````bash
+````
 ### Desenvolvedora
 Pequena Vênus ^-^
-
-````
+````bash
