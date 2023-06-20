@@ -11,5 +11,5 @@
  - SQLite Viewer (extensão)
  - REST Client
 ````bash
-    - Pequena Vênus ^-^
+ - Pequena Vênus ^-^
 ````
