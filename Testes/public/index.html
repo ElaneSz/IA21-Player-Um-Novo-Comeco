@@ -5,31 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste</title>
-    <style>
-        button {
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    
+    <form action="xxx">
+        <div>
+            <label for="title">Title</label>
+            <input type="title" id="title">
+        </div>
+        <div>
+            <label for="source">Source</label>
+            <input type="source" id="source">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="description" id="description">
+        </div>
+        <div>
+            <label for="thumb">Thumb</label>
+            <input type="thumb" id="thumb">
+        </div>
+        <div>
+            <button>Cadastrar</button>
+        </div>
+    </form>
+    <ul class="movie-list">
+        <!-- ================ -->
+    </ul>
     <script>
-        async function main (){ /*Função que 'sabe' que vai levar mais tempo para obter respostas*/
-            const year = new Date().getFullYear()
-            const request = await fetch("meus-dados.json") /*Para e espera a resposta | 'fetch' = Busca*/
-            const data = await request.json() /*Para e espera a resposta (dados) | Converte as informações*/
-            /*document.body.innerHTML = `<pre>${data}</pre>` Imprime os dados no corpo do HTML*/
+        const domMovieList = document.querySelector("ul.movie-list")
 
-            data.forEach(pessoa => {
-                document.body.innerHTML += `<button>
-                    ${pessoa.nome} |
-                    ${year - pessoa["data-nascimento"][0]} |
-                    ${pessoa.oculos ? "Usa oculos" : "Não usa oculos"} | 
-                    ${pessoa.apelido ? "Tem apelido" : "Não tem apelido"}
-                </button>` /*'?' = Se | ':' = Se não*/
-            })
+        async function listarTodosOsFilmes() {
+            const response = await fetch("/movies")
+            const movies = await response.json()
+            movies.forEach(movie => {
+                domMovieList.innerHTML += `
+                <li>
+                    <strong>Title</strong>
+                    ${movie.title}
+                    <ul>
+                        <li>
+                            <strong>Source</strong>
+                            ${movie.source}
+                        </li>
+                        <li>
+                            <strong>Description</strong>
+                            ${movie.description}
+                        </li>
+                        <li>
+                            <strong>Thumb</strong>
+                            ${movie.thumb}
+                        </li>
+                    </ul>
+                </li>
+                `
+            });
         }
-        main()
+        listarTodosOsFilmes()
     </script>
 </body>
 </html>
+
+<!-- title, source, description, thumb -->

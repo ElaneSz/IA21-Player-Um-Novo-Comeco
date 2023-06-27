@@ -17,19 +17,24 @@ app.post("/movies", async (req, res) => { // Criar
 })
 
 app.get("/movies", async (req, res) => { // Ler
-  const { id } = req.query
+  //const { id } = req.query
   const db = await getDatabaseInstance()
-  if (id) {
+  /*if (id) {
     const result = await db.get(`SELECT * FROM movies WHERE id=?`, id)
     res.json(result)
     return
-  }
+  }*/
   const result = await db.all(`SELECT * FROM movies`)
   res.json(result)
-  //const resut = await db.get(`SELECT * FROM movies WHERE id=?`, 
-  //[id])
   //res.json(id.toString()) // Converte em 'String' e imprime
   //res.json(resut) /*'.json' mostra o cabeçalho completo*/
+})
+
+app.get("/movies/:id", async (req, res) => { // Ler
+  const { id } = req.query
+  const db = await getDatabaseInstance()
+  const result = await db.get(`SELECT * FROM movies WHERE id=?`, id)
+  res.json(result)
 })
 
 app.put("/movies", async (req, res) => { // Atualizar
@@ -46,7 +51,7 @@ app.patch("/movies", async (req, res) => { /*Atualizar somente um*/
   const { id } = req.query
   const db = await getDatabaseInstance()
   const info = Object.keys(req.body).map(key => `${key}=?` ).join(', ') /*Percorre os valores e organiza o lado esquerdo*/
-  const values = [...Object.values(req.body), id] /*Quebra e adiciona o 'id'*/
+  const values = [...Object.values(req.body), id] /* Copia e adiciona o array para o array raiz | Quebra e adiciona o 'id' | Em um array só com valores*/
   const atualizar = `UPDATE movies SET ${info} WHERE id=?` /*Realiza o UPDATE*/
   try {
     const resut = await db.run(atualizar, values)
@@ -56,6 +61,7 @@ app.patch("/movies", async (req, res) => { /*Atualizar somente um*/
   }
   
 })
+/*==========================================================*/
 
 //Object.keys(x).map(key => `${key}=?` ).join(', ')
 

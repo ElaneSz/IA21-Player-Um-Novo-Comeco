@@ -2,7 +2,7 @@ POST http://127.0.0.1:3000/movies HTTP/1.1
 content-type: application/json
 
 {
-    "title": "RRRRRRR",
+    "title": "Elane",
     "source": "http://YYYYYYY.mp4",
     "description": "GGGGGG",
     "thumb": "http://GGGGGGGGGG.jpg"
