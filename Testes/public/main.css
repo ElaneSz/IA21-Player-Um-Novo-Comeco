@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    background-color: #F0F8FF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: #59429d;
+    margin-top: 2%;
+    justify-content: center;
+    display: flex;
+}
+
+form.form-alterar {
+    border: solid 3px #59429d;
+    border-style: groove;
+    padding: .5rem;
+    background-color: #c7bbe9;
+    margin-top: 1rem;
+    height: 30.5rem;
+}
+
+form.form-alterar > div {
+    margin: 0;
+    padding: 1rem;
+    display:grid;
+}
+
+input {
+    font-size: 1em;
+    color: #59429d;
+    border-radius: 5px;
+}
+
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: .5rem;
+}
+
+ul.movie-list {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+}
+
+ul.movie-list > li {
+    border: 3px solid #59429d;
+    border-style: groove;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+ul.movie-list > li > div {
+    border: 2px solid #59429d;
+    border-style: outset;
+    background-color: #9788c4;
+    padding: .25rem .5rem;
+    color: #ffffff;
+    font-size: 1em;
+}
+
+
+
+.excluir, .alterar, .cadastrar {
+    font-size: 1em;
+    background: #59429d;
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: .3rem;
+    color: #ffffff;
+    padding: 0.2em 0.6em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    transform: translate(-3%, -3%);
+    cursor: pointer;
+}
+
+/* Elemento de classe "botao" com o estado da pseudoclasse "hover" */
+.excluir:hover, .alterar:hover, .cadastrar:hover {
+    background: #afa1db;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: none;
+}
