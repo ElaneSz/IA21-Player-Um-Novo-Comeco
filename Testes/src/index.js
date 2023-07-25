@@ -1,3 +1,4 @@
+const crypto = require("crypto")
 const express = require("express")
 const fs = require("fs")
 const { getDatabaseInstance } = require("./database")
@@ -8,7 +9,32 @@ const app = express()
 app.use(express.static(__dirname + '/../public')) /*Caso não ache a rota | Pega o arquivo do jeito que é e envia para o cliente*/
 app.use(express.json()) /*Converte o que veio, em .json*/
 
-app.post("/movies", async (req, res) => { // Criar
+const loginTokens = []
+
+// VERIFICAR LOGIN
+function login(req, res, next) {
+  const { token } = req.query
+  if (loginTokens.includes(token)) {
+    next()
+    return
+  }
+  res.status(400).json({ error: true, msg: "token de acesso inválido!" })
+}
+
+// LOGIN
+app.get("/login", (req, res) => {
+  const { login, senha } = req.query
+  if (login == "daniel" && senha == "123123") {
+    const hash = crypto.randomBytes(20).toString('hex')
+    loginTokens.push(hash)
+    console.log(hash)
+    res.json({ error: false, token: hash })
+    return
+  }
+  res.status(400).json({ error: true, msg: "usuário e senha inválidos" })
+})
+
+app.post("/movies", login, async (req, res) => { // Criar
   const { title, source, description, thumb } = req.body
   const db = await getDatabaseInstance() // Conexão com o BD
   const resut = await db.run(`INSERT INTO movies(title, source, description, thumb) VALUES(?, ?, ?, ?)`, 
@@ -16,7 +42,7 @@ app.post("/movies", async (req, res) => { // Criar
   res.json(resut) /*'.json' mostra o cabeçalho completo*/
 })
 
-app.get("/movies", async (req, res) => { // Ler
+app.get("/movies", login, async (req, res) => { // Ler
   const { id } = req.query
   const db = await getDatabaseInstance()
   if (id) {
@@ -38,7 +64,7 @@ app.get("/movies/:id", async (req, res) => { // Ler
   return
 })
 
-app.put("/movies/:id", async (req, res) => { // Atualizar
+app.put("/movies/:id", login, async (req, res) => { // Atualizar
   const { id } = req.params
   const { title, source, description, thumb } = req.body
   const db = await getDatabaseInstance()
@@ -49,7 +75,7 @@ app.put("/movies/:id", async (req, res) => { // Atualizar
 
 /*==========================================================*/
 
-app.patch("/movies/:id", async (req, res) => { /*Atualizar somente um*/
+app.patch("/movies/:id", login, async (req, res) => { /*Atualizar somente um*/
   const { id } = req.params
   const db = await getDatabaseInstance()
   const info = Object.keys(req.body).map(key => `${key}=?` ).join(', ') /*Percorre os valores e organiza o lado esquerdo*/
@@ -74,7 +100,7 @@ app.patch("/movies/:id", async (req, res) => { /*Atualizar somente um*/
   res.json(resut) /*'.json' mostra o cabeçalho completo
 })*/
 
-app.delete("/movies/:id", async (req, res) => { // Deletar
+app.delete("/movies/:id", login, async (req, res) => { // Deletar
   const { id } = req.params
   const db = await getDatabaseInstance()
   const resut = await db.run(`DELETE FROM movies WHERE id=?`,  [id])

@@ -10,6 +10,23 @@
     <script defer async src="main.js"></script>
 </head>
 <body>
+    <dialog> <!--Só aparece quando solicitado-->
+        <header>
+            <h1>Logue-se</h1>
+        </header>
+        <main>
+            <form action="dialog">
+                <input placeholder="login" name="login">
+                <input placeholder="senha" name="senha">
+            </form>
+        </main>
+        <footer>
+            <div class="msg"></div>
+            <button class="bt-send">logar</button>
+            <button class="bt-cancel">cancelar</button>
+        </footer>
+    </dialog>
+
     <form class="form-alterar">
         <div>
             <label for="title">Title</label>

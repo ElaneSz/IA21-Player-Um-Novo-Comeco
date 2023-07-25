@@ -1,9 +1,35 @@
+const { response } = require("express")
 const domMovieList = document.querySelector("ul.movie-list")
 const domFormAlterar = document.querySelector("form.form-alterar")
+const loginModal = document.querySelector("dialog")
+const loginForm = loginModal.querySelector("form")
+const loginMsg = loginModal.querySelector(".msg")
+const loginFormButtonSend = loginModal.querySelector(".bt-send")
+
+// ---✀------------------------------------------------------------------
+
+if (!localStorage.getItem("token")){
+    loginModal.showModal()
+} else {
+    listarTodosOsFilmes()
+}
+
+loginFormButtonSend.addEventListener("click", async ev => {
+    const { login, senha } = loginForm
+    const response = await fetch(`/login?login=${login.value}&senha=${senha.value}`)
+    const data = await response.json()
+    if (data.token) {
+      localStorage.setItem("token", data.token)
+      loginModal.close()
+      listarTodosOsFilmes()
+      return
+    }
+    loginMsg.innerHTML = `<strong>Usuário e/ou senha inválidos</strong>`
+  })
 
 // ---✀------------------------------------------------------------------
 async function listarTodosOsFilmes() {
-    const response = await fetch("/movies")
+    const response = await fetch(`/movies?token=${localStorage.getItem("token")}`)
     const movies = await response.json()
     domMovieList.innerHTML = ""
     movies.forEach(movie => {
@@ -31,7 +57,6 @@ async function listarTodosOsFilmes() {
                         `
     });
 }
-listarTodosOsFilmes()
 
 // ---✀------------------------------------------------------------------
 domFormAlterar.addEventListener("submit", async ev => {
@@ -46,7 +71,7 @@ domFormAlterar.addEventListener("submit", async ev => {
         thumb: domFormAlterar.thumb.value,
     })
 
-    const response = await fetch("/movies", {
+    const response = await fetch(`/movies?token=${localStorage.getItem("token")}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body
@@ -87,3 +112,8 @@ domMovieList.addEventListener("click", async ev => {
         return
     }
 })
+
+// OAuth | Login com o FaceBook
+
+//npm create vite@latest | TS + SWC
+//58 | Descomentar e adicionar 'dist'
