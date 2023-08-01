@@ -27,7 +27,7 @@ app.get("/login", (req, res) => {
   if (login == "Elane" && senha == "123123") {
     const hash = crypto.randomBytes(20).toString('hex')
     loginTokens.push(hash)
-    console.log(hash)
+    //console.log(hash)
     res.json({ error: false, token: hash })
     return
   }
@@ -42,7 +42,7 @@ app.post("/movies", login, async (req, res) => { // Criar
   res.json(resut) /*'.json' mostra o cabeçalho completo*/
 })
 
-app.get("/movies", login, async (req, res) => { // Ler
+app.get("/movies", async (req, res) => { // Ler
   const { id } = req.query
   const db = await getDatabaseInstance()
   if (id) {

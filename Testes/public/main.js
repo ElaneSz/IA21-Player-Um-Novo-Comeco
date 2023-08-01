@@ -1,4 +1,4 @@
-const { response } = require("express")
+//const { response } = require("express")
 const domMovieList = document.querySelector("ul.movie-list")
 const domFormAlterar = document.querySelector("form.form-alterar")
 const loginModal = document.querySelector("dialog")
@@ -8,7 +8,7 @@ const loginFormButtonSend = loginModal.querySelector(".bt-send")
 
 // ---✀------------------------------------------------------------------
 
-if (!localStorage.getItem("token")){
+if (!localStorage.getItem("token")) {
     loginModal.showModal()
 } else {
     listarTodosOsFilmes()
@@ -25,7 +25,7 @@ loginFormButtonSend.addEventListener("click", async ev => {
       return
     }
     loginMsg.innerHTML = `<strong>Usuário e/ou senha inválidos</strong>`
-  })
+})
 
 // ---✀------------------------------------------------------------------
 async function listarTodosOsFilmes() {
@@ -89,7 +89,8 @@ domMovieList.addEventListener("click", async ev => {
 
     if (el.classList.contains("excluir")) {
         id = el.dataset.id
-        const response = await fetch(`/movies/${id}`, { method: "DELETE" })
+        const token = localStorage.getItem("token")
+        const response = await fetch(`/movies/${id}?token=${token}`, { method: "DELETE" })
         const movies = await response.json()
         listarTodosOsFilmes()
         return
@@ -100,10 +101,9 @@ domMovieList.addEventListener("click", async ev => {
         const inputs = parent.querySelectorAll("[name]")
         const body = {}
         id = el.dataset.id
-        //console.log(id,id,id,id,id,id,id);
-        //console.log(body)
         inputs.forEach(input => body[input.name] = input.value)
-        const response = await fetch(`/movies/${id}`, {
+        const token = localStorage.getItem("token")
+        const response = await fetch(`/movies/${id}?token=${token}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -114,6 +114,5 @@ domMovieList.addEventListener("click", async ev => {
 })
 
 // OAuth | Login com o FaceBook
-
 //npm create vite@latest | TS + SWC
 //58 | Descomentar e adicionar 'dist'
