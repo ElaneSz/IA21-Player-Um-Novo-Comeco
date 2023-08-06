@@ -30,13 +30,7 @@ const containers = document.querySelectorAll("div.ia21-player")/*'querySelectorA
             
             lista.forEach(filme => {
                 playlist.innerHTML += `
-                <div>${filme.title}
-                <ul>
-                    <li><strong>Source: </strong>${filme.source}</li>
-                    <li><strong>Description: </strong>${filme.description}</li>
-                    <li><strong>Thumb: </strong>${filme.thumb}</li>
-                </ul>
-                </div>
+                <div>${filme.title}</div>
                 `
             })
             
